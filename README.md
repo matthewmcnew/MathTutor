@@ -1,4 +1,6 @@
 MathTutor
 =========
 
-MMM makes a ath tutor. 
+MMM makes a math tutor. 
+
+
