@@ -9,6 +9,7 @@ import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
 import android.gesture.GestureOverlayView.OnGesturePerformedListener;
 import android.gesture.Prediction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
@@ -53,10 +54,23 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 		     int result = Integer.valueOf(predictions.get(0).name);
 
 		     if(questions.getAnswer() == result) {
+		    	 text.setTextColor(Color.GREEN);
+		    	 try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	 
+		    	 text.setText(questions.problem + " = " + result);
+		    	 text.setTextColor(Color.BLACK);
 		    	 Toast.makeText(this, "Good Job Sport", Toast.LENGTH_LONG).show();
-		    	 text.setText(questions.genProblem());
+//		    	 text.setText(questions.genProblem());
 		     } else
 		     {
+		    	 text.setText(questions.problem + " = " + result);
+		    	 text.setTextColor(Color.RED);
+		    	 
 		    	 Toast.makeText(this, "Try Again. ", Toast.LENGTH_LONG).show(); 
 		     }  
 		
