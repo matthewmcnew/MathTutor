@@ -29,10 +29,8 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
         mLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
         if (!mLibrary.load()) {
           finish();
-        }
-        
+        }   
         questions = new QuestionGen(); 
-        
         
         text = (TextView) findViewById(R.id.textView1);
         GestureOverlayView gestures = (GestureOverlayView) findViewById(R.id.gestures);
@@ -56,11 +54,11 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 
 		     if(questions.getAnswer() == result) {
 		    	 Toast.makeText(this, "Good Job Sport", Toast.LENGTH_LONG).show();
+		    	 text.setText(questions.genProblem());
 		     } else
 		     {
 		    	 Toast.makeText(this, "Try Again. ", Toast.LENGTH_LONG).show(); 
-		     }
-		      
+		     }  
 		
 		   } 
 			   
