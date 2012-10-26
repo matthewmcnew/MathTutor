@@ -49,7 +49,7 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
         gestures.addOnGesturePerformedListener(this);
         String p1 = questions.genProblem();
         Problem p = questions.getProblem();
-        text.setText(p1);
+        text.setText(p1+"             ");
         
         score = 0;
         count = 0;
@@ -71,10 +71,10 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 			   
 			   if(predictions.get(0).name.equals("left")) {
 				   count++;
-				   text.setTextColor(Color.BLACK);
+				//   text.setTextColor(Color.BLACK);
 				   Problem problem;
-				   flipper.setInAnimation(this,android.R.anim.slide_in_left);
-			       flipper.setOutAnimation(this,android.R.anim.slide_out_right);
+				   flipper.setInAnimation(this,R.anim.slide_in_right);
+			       flipper.setOutAnimation(this,R.anim.slide_out_left);
 				   if(count<problems.size()) {
 					   problem = problems.get(count);
 				    
@@ -91,21 +91,24 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 					   flipper.addView(newProblem);
 					   
 					   flipper.showNext();
+					   
 				   }
 				   text = (TextView) flipper.getCurrentView();
 				   //
 			   } else if(predictions.get(0).name.equals("right")){
 				   if(count>0) {
-					   flipper.setInAnimation(this,R.anim.slide_in_right);
-				       flipper.setOutAnimation(this,android.R.anim.slide_in_left);
+					   flipper.setInAnimation(this, R.anim.slide_in_left);
+				       flipper.setOutAnimation(this, R.anim.slide_out_right);
 					   flipper.showPrevious(); 
 					   count--;
 					   Problem problem = problems.get(count);
 					   text = (TextView) flipper.getCurrentView();
-					   text.setTextColor(Color.BLACK);
+		//			   text.setTextColor(Color.BLACK);
 					   text.setText(problem.toString());
 				   }
 			   } else if(!problems.get(count).isSolved()) {
+				   
+				   text = (TextView) flipper.getCurrentView();
 		     int result = Integer.valueOf(predictions.get(0).name);
 
 		     if(problems.get(count).getSol() == result) {
@@ -126,9 +129,6 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 		    	 text.setTextColor(Color.RED);
 		    	 
 		    	 Toast.makeText(this, "Try Again. ", Toast.LENGTH_LONG).show();
-
-		    	 //			 text.setTextColor(Color.BLACK);
-		    	 //	    	 text.setText(questions.genProblem());
 
 		     }  
 
