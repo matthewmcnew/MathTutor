@@ -20,8 +20,10 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
     private GestureLibrary mLibrary;
 	private QuestionGen questions;
 	private TextView text;
+	private TextView scoreView;
     
 	private int score;
+	private GestureOverlayView gestures;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,8 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
         questions = new QuestionGen(); 
         
         text = (TextView) findViewById(R.id.textView1);
-        GestureOverlayView gestures = (GestureOverlayView) findViewById(R.id.gestures);
+        scoreView = (TextView) findViewById(R.id.score);
+        gestures = (GestureOverlayView) findViewById(R.id.gestures);
    
         gestures.addOnGesturePerformedListener(this);
         text.setText(questions.genProblem());
@@ -54,19 +57,25 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 		   ArrayList<Prediction> predictions = mLibrary.recognize(gesture);
 
 		   if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
+			   
+			   if(predictions.get(0).name.equals("3")) {
+			    	 text.setTextColor(Color.BLACK);
+			    	 text.setText(questions.genProblem());
+			    	 gestures.setGestureVisible(true);
+			   } else {
 		     int result = Integer.valueOf(predictions.get(0).name);
 
 		     if(questions.getAnswer() == result) {
 		    	 text.setTextColor(Color.GREEN);
 
 		    	 text.setText(questions.problem + " = " + result);
+		    	 scoreView.setText("Score: " + ++score);
 		    	 //	 text.setTextColor(Color.BLACK);
 		    	 Toast.makeText(this, "Good Job Sport", Toast.LENGTH_LONG).show();
+		    	 
+		    	 gestures.setGestureVisible(false);
 
-
-		    	 text.setTextColor(Color.BLACK);
-
-		    	 text.setText(questions.genProblem());
+//		    	 text.setText(questions.genProblem());
 		     } else
 		     {
 		    	 text.setText(questions.problem + " = " + result);
@@ -78,6 +87,8 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 	//	    	 text.setText(questions.genProblem());
 
 		     }  
+		     
+			   }
 		
 		   } 
 			   
