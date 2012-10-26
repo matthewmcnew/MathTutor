@@ -42,7 +42,7 @@ public class QuestionGen {
 			genX();
 			genY();
 			genOp();
-		}while( answer != 1);
+		}while( answer == 1);
 		
 		problem = ""+ x + operation + y;
 		return problem;
