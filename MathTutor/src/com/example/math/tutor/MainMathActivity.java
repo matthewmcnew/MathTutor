@@ -21,6 +21,7 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 	private QuestionGen questions;
 	private TextView text;
     
+	private int score;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
    
         gestures.addOnGesturePerformedListener(this);
         text.setText(questions.genProblem());
+        
+        score = 0;
     }
 
     @Override
@@ -55,23 +58,25 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 
 		     if(questions.getAnswer() == result) {
 		    	 text.setTextColor(Color.GREEN);
-		    	 try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		    	 
+
 		    	 text.setText(questions.problem + " = " + result);
-		    	 text.setTextColor(Color.BLACK);
+		    	 //	 text.setTextColor(Color.BLACK);
 		    	 Toast.makeText(this, "Good Job Sport", Toast.LENGTH_LONG).show();
-//		    	 text.setText(questions.genProblem());
+
+
+		    	 text.setTextColor(Color.BLACK);
+
+		    	 text.setText(questions.genProblem());
 		     } else
 		     {
 		    	 text.setText(questions.problem + " = " + result);
 		    	 text.setTextColor(Color.RED);
-		    	 
-		    	 Toast.makeText(this, "Try Again. ", Toast.LENGTH_LONG).show(); 
+		    	 //
+		    	 Toast.makeText(this, "Try Again. ", Toast.LENGTH_LONG).show();
+		    	 		    	 
+	//			 text.setTextColor(Color.BLACK);
+	//	    	 text.setText(questions.genProblem());
+
 		     }  
 		
 		   } 
