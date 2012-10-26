@@ -3,7 +3,7 @@ package com.example.math.tutor;
 import java.util.Random;
 
 public class QuestionGen {
-	final static int NUM_LIMITER = 5;
+	final static int NUM_LIMITER = 4;
 	final static int OP_LIMITER = 2;
 	Random randGen;
 	public int x;
@@ -18,7 +18,7 @@ public class QuestionGen {
 		randGen = new Random();
 	}
 	private void genX(){
-		x = Math.abs(randGen.nextInt() % NUM_LIMITER);
+		x = Math.abs(randGen.nextInt() % NUM_LIMITER) + 1;
 	}
 	private void genY(){
 		y = Math.abs(randGen.nextInt() % x);
