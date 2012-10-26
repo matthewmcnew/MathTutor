@@ -73,26 +73,35 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 				   count++;
 				   text.setTextColor(Color.BLACK);
 				   Problem problem;
+				   flipper.setInAnimation(this,android.R.anim.slide_in_left);
+			       flipper.setOutAnimation(this,android.R.anim.slide_out_right);
 				   if(count<problems.size()) {
 					   problem = problems.get(count);
+				    
+					   flipper.showNext(); 
 				   } else {
 					   questions.genProblem();
 					   problem = questions.getProblem();
 					   problems.add(problem);
 					   
-//					   //Add to flipper
-//					   TextView newProblem = new TextView(getApplicationContext());
-//					   newProblem.setText(problem.toString());
-//					   flipper.addView(newProblem);
-//					   flipper.showNext();
+					   //Add to flipper
+					   TextView newProblem = new TextView(getApplicationContext());
+					   newProblem.setText(problem.toString());
+					   newProblem.setTextSize(100);
+					   flipper.addView(newProblem);
+					   
+					   flipper.showNext();
 				   }
-				   text.setText(problem.toString());
-				   gestures.setGestureVisible(true);
+				   text = (TextView) flipper.getCurrentView();
 				   //
 			   } else if(predictions.get(0).name.equals("right")){
 				   if(count>0) {
+					   flipper.setInAnimation(this,R.anim.slide_in_right);
+				       flipper.setOutAnimation(this,android.R.anim.slide_in_left);
+					   flipper.showPrevious(); 
 					   count--;
 					   Problem problem = problems.get(count);
+					   text = (TextView) flipper.getCurrentView();
 					   text.setTextColor(Color.BLACK);
 					   text.setText(problem.toString());
 				   }
