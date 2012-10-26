@@ -18,10 +18,10 @@ public class QuestionGen {
 		randGen = new Random();
 	}
 	private void genX(){
-		x = Math.abs(randGen.nextInt() % NUM_LIMITER) + 1;
+		x = Math.abs(randGen.nextInt()) % NUM_LIMITER + 1;
 	}
 	private void genY(){
-		y = Math.abs(randGen.nextInt() % x);
+		y = Math.abs(randGen.nextInt()) % x;
 	}
 	private void genOp(){
 		chooser = Math.abs(randGen.nextInt() % OP_LIMITER);
