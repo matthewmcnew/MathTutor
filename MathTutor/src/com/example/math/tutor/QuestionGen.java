@@ -16,15 +16,16 @@ public class QuestionGen {
 	
 	public QuestionGen(){
 		randGen = new Random();
+		answer = 1;
 	}
 	private void genX(){
 		x = Math.abs(randGen.nextInt()) % NUM_LIMITER + 1;
 	}
 	private void genY(){
-		y = Math.abs(randGen.nextInt()) % (x-1);
+		y = Math.abs(randGen.nextInt()) % x;
 	}
 	private void genOp(){
-		chooser = Math.abs(randGen.nextInt() % OP_LIMITER);
+		chooser = Math.abs(randGen.nextInt()) % OP_LIMITER;
 		if(chooser == 0){
 			operation = '+';
 			answer = x + y;
@@ -37,9 +38,12 @@ public class QuestionGen {
 		return answer;
 	}
 	public String genProblem(){
-		genX();
-		genY();
-		genOp();
+		do{
+			genX();
+			genY();
+			genOp();
+		}while( answer != 1);
+		
 		problem = ""+ x + operation + y;
 		return problem;
 	}
