@@ -23,7 +23,7 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 	private TextView scoreView;
     
 	private int score;
-	private ArrayList<String> problems;
+	private ArrayList<Problem> problems;
 	private int count;
 	private GestureOverlayView gestures;
 
@@ -44,12 +44,13 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
    
         gestures.addOnGesturePerformedListener(this);
         String p1 = questions.genProblem();
+        Problem p = questions.getProblem();
         text.setText(p1);
         
         score = 0;
         count = 0;
-        problems = new ArrayList<String>();
-        problems.add(p1);
+        problems = new ArrayList<Problem>();
+        problems.add(p);
     }
 
     @Override
@@ -67,59 +68,59 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 			   if(predictions.get(0).name.equals("left")) {
 				   count++;
 				   text.setTextColor(Color.BLACK);
-				   String problem;
+				   Problem problem;
 				   if(count<problems.size()-1) {
 					   problem = problems.get(count);
 				   } else {
-					   problem = questions.genProblem();
+					   questions.genProblem();
+					   problem = questions.getProblem();
 					   problems.add(problem);
 				   }
-				   text.setText(problem);
+				   text.setText(problem.toString());
 				   gestures.setGestureVisible(true);
 				   //
 			   } else if(predictions.get(0).name.equals("right")){
 				   if(count>0) {
 					   count--;
-					   String problem = problems.get(count);
+					   Problem problem = problems.get(count);
 					   text.setTextColor(Color.BLACK);
-					   text.setText(problem);
+					   text.setText(problem.toString());
 				   }
 			   } else {
 		     int result = Integer.valueOf(predictions.get(0).name);
 
-		     if(questions.getAnswer() == result) {
+		     if(problems.get(count).getSol() == result) {
 		    	 text.setTextColor(Color.GREEN);
 		    	 
-		    	 String problem = questions.problem + " = " + result;
+		    	 Problem problem = problems.get(count);
+		    	 problem.setSolved(true);
 		    	 problems.set(count, problem);
 		    	 
-		    	 text.setText(problem);
+		    	 text.setText(problem.toString());
 		    	 scoreView.setText("Score: " + ++score);
 		    	 //	 text.setTextColor(Color.BLACK);
 		    	 Toast.makeText(this, "Good Job Sport", Toast.LENGTH_LONG).show();
 		    	 
-		    	 gestures.setGestureVisible(false);
+		//    	 gestures.setGestureVisible(false);
 
 //		    	 text.setText(questions.genProblem());
-		     } else
-		     {
-		    	 String problem = questions.problem + " = " + result;
-		    	 problems.set(count, problem);
+		     } else {
+		    	 String problem = problems.get(count) + " = " + result;
 		    	 
 		    	 text.setText(problem);
 		    	 text.setTextColor(Color.RED);
 		    	 
 		    	 Toast.makeText(this, "Try Again. ", Toast.LENGTH_LONG).show();
-		    	 		    	 
-	//			 text.setTextColor(Color.BLACK);
-	//	    	 text.setText(questions.genProblem());
+
+		    	 //			 text.setTextColor(Color.BLACK);
+		    	 //	    	 text.setText(questions.genProblem());
 
 		     }  
-		     
+
 			   }
-		
+
 		   } 
-			   
+
 		
 	}
 }

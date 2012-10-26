@@ -13,7 +13,6 @@ public class QuestionGen {
 	public int answer;
 	public String problem;
 	
-	
 	public QuestionGen(){
 		randGen = new Random();
 		answer = 1;
@@ -48,5 +47,8 @@ public class QuestionGen {
 		return problem;
 	}
 	
+	public Problem getProblem() {
+		return new Problem(x, y, answer, operation);
+	}
 
 }
