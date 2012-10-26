@@ -21,7 +21,7 @@ public class QuestionGen {
 		x = Math.abs(randGen.nextInt() % NUM_LIMITER);
 	}
 	private void genY(){
-		y = Math.abs(randGen.nextInt() % NUM_LIMITER);
+		y = Math.abs(randGen.nextInt() % x);
 	}
 	private void genOp(){
 		chooser = Math.abs(randGen.nextInt() % OP_LIMITER);
