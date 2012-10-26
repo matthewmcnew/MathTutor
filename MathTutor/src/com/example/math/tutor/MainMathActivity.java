@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 public class MainMathActivity extends Activity implements OnGesturePerformedListener {
 	
@@ -26,6 +27,7 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 	private ArrayList<Problem> problems;
 	private int count;
 	private GestureOverlayView gestures;
+	private ViewFlipper flipper;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
         questions = new QuestionGen(); 
         
         text = (TextView) findViewById(R.id.textView1);
+        
+        flipper = (ViewFlipper) findViewById(R.id.flipper);
         scoreView = (TextView) findViewById(R.id.score);
         gestures = (GestureOverlayView) findViewById(R.id.gestures);
    
@@ -75,6 +79,12 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 					   questions.genProblem();
 					   problem = questions.getProblem();
 					   problems.add(problem);
+					   
+//					   //Add to flipper
+//					   TextView newProblem = new TextView(getApplicationContext());
+//					   newProblem.setText(problem.toString());
+//					   flipper.addView(newProblem);
+//					   flipper.showNext();
 				   }
 				   text.setText(problem.toString());
 				   gestures.setGestureVisible(true);
@@ -100,10 +110,6 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 		    	 scoreView.setText("Score: " + ++score);
 		    	 //	 text.setTextColor(Color.BLACK);
 		    	 Toast.makeText(this, "Good Job Sport", Toast.LENGTH_LONG).show();
-		    	 //
-		//    	 gestures.setGestureVisible(false);
-
-//		    	 text.setText(questions.genProblem());
 		     } else {
 		    	 String problem = problems.get(count) + " = " + result;
 		    	 
