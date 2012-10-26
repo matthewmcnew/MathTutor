@@ -71,7 +71,7 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 			   
 			   if(predictions.get(0).name.equals("left")) {
 				   count++;
-				//   text.setTextColor(Color.BLACK);
+				   text.setTextColor(Color.BLACK);
 				   Problem problem;
 				   flipper.setInAnimation(this,R.anim.slide_in_right);
 			       flipper.setOutAnimation(this,R.anim.slide_out_left);
