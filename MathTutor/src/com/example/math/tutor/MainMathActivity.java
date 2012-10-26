@@ -101,12 +101,14 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 				       flipper.setOutAnimation(this, R.anim.slide_out_right);
 					   flipper.showPrevious(); 
 					   count--;
-		//			   Problem problem = problems.get(count);
-		//			   text = (TextView) flipper.getCurrentView();
+					   Problem problem = problems.get(count);
+					   text = (TextView) flipper.getCurrentView();
 		//			   text.setTextColor(Color.BLACK);
-		//			   text.setText(problem.toString());
+					   text.setText(problem.toString());
 				   }
 			   } else if(!problems.get(count).isSolved()) {
+				   
+				   text = (TextView) flipper.getCurrentView();
 		     int result = Integer.valueOf(predictions.get(0).name);
 
 		     if(problems.get(count).getSol() == result) {
@@ -127,9 +129,6 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 		    	 text.setTextColor(Color.RED);
 		    	 
 		    	 Toast.makeText(this, "Try Again. ", Toast.LENGTH_LONG).show();
-
-		    	 //			 text.setTextColor(Color.BLACK);
-		    	 //	    	 text.setText(questions.genProblem());
 
 		     }  
 
