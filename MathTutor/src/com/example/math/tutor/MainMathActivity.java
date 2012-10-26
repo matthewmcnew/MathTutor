@@ -11,11 +11,15 @@ import android.gesture.GestureOverlayView.OnGesturePerformedListener;
 import android.gesture.Prediction;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainMathActivity extends Activity implements OnGesturePerformedListener {
 	
     private GestureLibrary mLibrary;
+	private QuestionGen questions;
+	private TextView text;
+    
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,8 +31,14 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
           finish();
         }
         
+        questions = new QuestionGen(); 
+        
+        
+        text = (TextView) findViewById(R.id.textView1);
         GestureOverlayView gestures = (GestureOverlayView) findViewById(R.id.gestures);
+   
         gestures.addOnGesturePerformedListener(this);
+        text.setText(questions.genProblem());
     }
 
     @Override
@@ -44,13 +54,15 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 		   if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
 		     int result = Integer.valueOf(predictions.get(0).name);
 
-		     
-		       Toast.makeText(this, "" + result, Toast.LENGTH_LONG).show();
+		     if(questions.getAnswer() == result) {
+		    	 Toast.makeText(this, "Good Job Sport", Toast.LENGTH_LONG).show();
+		     } else
+		     {
+		    	 Toast.makeText(this, "Try Again. ", Toast.LENGTH_LONG).show(); 
+		     }
+		      
 		
-		   } else {
-			   Toast.makeText(this, "Couldn't Recognize. Sorry Sport.", Toast.LENGTH_LONG).show();   
-		   }
-			   
+		   } 
 			   
 		
 	}
