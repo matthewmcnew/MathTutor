@@ -58,7 +58,7 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 
 		   if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
 			   
-			   if(predictions.get(0).name.equals("3")) {
+			   if(predictions.get(0).name.equals("left")) {
 			    	 text.setTextColor(Color.BLACK);
 			    	 text.setText(questions.genProblem());
 			    	 gestures.setGestureVisible(true);
