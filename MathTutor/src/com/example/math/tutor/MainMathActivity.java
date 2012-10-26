@@ -69,7 +69,7 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 				   count++;
 				   text.setTextColor(Color.BLACK);
 				   Problem problem;
-				   if(count<problems.size()-1) {
+				   if(count<problems.size()) {
 					   problem = problems.get(count);
 				   } else {
 					   questions.genProblem();
@@ -86,7 +86,7 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 					   text.setTextColor(Color.BLACK);
 					   text.setText(problem.toString());
 				   }
-			   } else {
+			   } else if(!problems.get(count).isSolved()) {
 		     int result = Integer.valueOf(predictions.get(0).name);
 
 		     if(problems.get(count).getSol() == result) {
@@ -100,7 +100,7 @@ public class MainMathActivity extends Activity implements OnGesturePerformedList
 		    	 scoreView.setText("Score: " + ++score);
 		    	 //	 text.setTextColor(Color.BLACK);
 		    	 Toast.makeText(this, "Good Job Sport", Toast.LENGTH_LONG).show();
-		    	 
+		    	 //
 		//    	 gestures.setGestureVisible(false);
 
 //		    	 text.setText(questions.genProblem());
